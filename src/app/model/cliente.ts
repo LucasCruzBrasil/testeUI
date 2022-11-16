@@ -8,6 +8,7 @@ export class Cliente {
     bairro:string
     localidade:string
     uf:string
+    numero:number
     id_cliente:number
 
 }

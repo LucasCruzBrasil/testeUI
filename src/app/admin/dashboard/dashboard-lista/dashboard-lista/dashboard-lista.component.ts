@@ -10,9 +10,9 @@ import { ClienteService } from 'src/app/service/cliente.service';
   styleUrls: ['./dashboard-lista.component.css']
 })
 export class DashboardListaComponent implements OnInit {
-  
+
   clientes: Cliente[];
-  cliente:Cliente
+  cliente: Cliente
   selctionClient: Cliente
   deleteModelRef: BsModalRef;
   formulario: FormGroup
@@ -29,7 +29,7 @@ export class DashboardListaComponent implements OnInit {
   ngOnInit(): void {
     this.list();
     this.cliente = new Cliente()
-    
+
     this.formulario = new FormGroup({
       nome: new FormControl(''),
       sobre_nome: new FormControl(''),
@@ -40,11 +40,12 @@ export class DashboardListaComponent implements OnInit {
       bairro: new FormControl(''),
       localidade: new FormControl(''),
       uf: new FormControl(''),
-      id_cliente:new FormControl('')
+      numero: new FormControl(''),
+      id_cliente: new FormControl('')
     })
   }
 
-  list(){
+  list() {
     this.service.clientList().subscribe(
       res => {
         this.clientes = res['clientes']
@@ -52,8 +53,8 @@ export class DashboardListaComponent implements OnInit {
     )
   }
 
-  onDelete(clientes){
-    
+  onDelete(clientes) {
+
     this.cliente = clientes
     console.log(clientes)
     this.deleteModelRef = this.modalService.show(this.deleteModal, { class: 'modal-sm' })
@@ -64,7 +65,7 @@ export class DashboardListaComponent implements OnInit {
     console.log(id)
     this.service.deleteCliente(id).subscribe(
       result => {
-        
+
         console.log('excluído com sucesso', id)
         this.list();
         this.modalService.hide();
@@ -73,12 +74,12 @@ export class DashboardListaComponent implements OnInit {
 
   }
 
-  fecharModal(cliente){
+  fecharModal(cliente) {
     this.modalService.hide();
   }
-  
+
   modal(cliente) {
-    this.cliente =cliente
+    this.cliente = cliente
     this.deleteModelRef = this.modalService.show(this.editModal)
     this.service.carregarPeloId(cliente['id_cliente']).subscribe(
       res => {
@@ -91,7 +92,7 @@ export class DashboardListaComponent implements OnInit {
 
   upDateForm(clientes: Cliente[]) {
     this.formulario.patchValue({
-     nome:clientes['nome'],
+      nome: clientes['nome'],
       sobre_nome: clientes['sobre_nome'],
       nome_mae: clientes['nome_mae'],
       cpf: clientes['cpf'],
@@ -100,12 +101,11 @@ export class DashboardListaComponent implements OnInit {
       logradouro: clientes['logradouro'],
       bairro: clientes['bairro'],
       localidade: clientes['localidade'],
-      
-
-      id_cliente:clientes['id_cliente']
+      numero: clientes['numero'],
+      id_cliente: clientes['id_cliente']
 
     })
-    
+
   }
 
   atualizarCliente(clientes: Cliente) {

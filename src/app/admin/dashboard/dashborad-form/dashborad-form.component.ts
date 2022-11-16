@@ -40,7 +40,8 @@ export class DashboradFormComponent implements OnInit {
       logradouro: new FormControl(''),
       bairro: new FormControl(''),
       localidade: new FormControl(''),
-      uf: new FormControl('')
+      uf: new FormControl(''),
+      numero:new FormControl('')
     })
 
 
@@ -67,7 +68,8 @@ export class DashboradFormComponent implements OnInit {
       logradouro: clientes['logradouro'],
       bairro: clientes['bairro'],
       localidade: clientes['localidade'],
-      uf: clientes['uf']
+      uf: clientes['uf'],
+      numero:clientes['numero']
 
 
     })
