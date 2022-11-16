@@ -1,0 +1,84 @@
+<div class="container">
+  <form [formGroup]="formulario">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="inputEmail4">Nome</label>
+        <input type="text" class="form-control" id="inputEmail4" placeholder="nome" formControlName="nome">
+        <div *ngIf="formulario.get('nome')?.errors && formulario.get('nome').touched" class="alert alert-danger">
+          É preciso informar nome
+        </div>
+      </div>
+
+
+      <div class="form-group col-md-4">
+        <label for="inputPassword4">Sobre Nome</label>
+        <input type="text" class="form-control" id="inputPassword4" placeholder="Sobre Nome"
+          formControlName="sobre_nome">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputPassword4">CPF</label>
+       
+        <input type="number" class="form-control" id="inputPassword4" placeholder="CPF" formControlName="cpf">
+        <div *ngIf="formulario.get('cpf')?.errors && formulario.get('cpf').touched" class="alert alert-danger">
+          É preciso informar cpf
+        </div>
+      </div>
+     
+    </div>
+
+    <div class="form-group">
+      <label for="inputAddress">Nome da Mae</label>
+      <input formControlName="nome_mae" type="text" class="form-control" id="inputAddress"
+        placeholder="Nome de Sua mãe completo">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="inputAddress">CEP</label>
+
+        <input formControlName="cep" [(ngModel)]="cliente.cep" on-focusout='consultaCepClient(cliente.cep)' type="text"
+          class="form-control" id="inputAddress" placeholder="1234 Main St">
+
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="inputAddress2">Logradouro</label>
+        <input input formControlName="logradouro" [(ngModel)]="cliente.logradouro" type="text" class="form-control"
+          id="inputAddress">
+
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputAddress2">Bairro</label>
+        <input formControlName="bairro" [(ngModel)]="cliente.bairro" type="text" class="form-control" id="inputAddress">
+
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="inputCity">Localidade</label>
+        <input formControlName="localidade" [(ngModel)]="cliente.localidade" type="text" class="form-control"
+          id="inputCity">
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="inputZip">Estado</label>
+        <input formControlName="uf" [(ngModel)]="cliente.uf" type="text" class="form-control" id="inputZip">
+      </div>
+    </div>
+
+
+    <button [disabled]="formulario.invalid"type="submit" class="btn btn-primary" (click)="clientSave()">Salvar</button>
+  </form>
+</div>
+
+<ng-template #confirmModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Create Works</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="fecharModal()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    O cliente foi criado com sucesso
+  </div>
+</ng-template>

@@ -1,0 +1,110 @@
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Cidade</th>
+                <th scope="col">Bairro</th>
+                <th scope="col">Rua</th>
+                <th scope="col">Delete</th>
+
+                <th scope="col">Edit</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cliente of clientes">
+                <th scope="row">1</th>
+                <td>{{cliente.nome}}</td>
+                <td>{{cliente.cpf}}</td>
+                <td>{{cliente.localidade}}</td>
+                <td>{{cliente.bairro}}</td>
+                <td>{{cliente.logradouro}}</td>
+                <td><a (click)="onDelete(cliente)"><i class="bi bi-trash3"></i></a></td>
+
+
+                <td><a (click)="modal(cliente)"><i class="bi bi-pencil-fill"></i></a></td>
+            </tr>
+            <tr>
+
+        </tbody>
+
+    </table>
+</div>
+
+<ng-template #deleteModel>
+    <div class="modal-body text-center">
+        <p>Do you want to confirm?</p>
+        <button type="button" class="btn btn-default" (click)="delete(cliente.id_cliente)">Yes</button>
+        {{''}}
+        {{''}}
+
+        <button  type="button" class="btn btn-primary" (click)="fecharModal(cliente)">No</button>
+    </div>
+
+</ng-template>
+
+<ng-template #edit>
+    <div class="modal-body text-center">
+        <form [formGroup]="formulario">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputEmail4">Nome</label>
+                    <input type="text" class="form-control" id="inputEmail4" placeholder="nome" formControlName="nome">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputPassword4">Sobre Nome</label>
+                    <input type="text" class="form-control" id="inputPassword4" placeholder="Sobre Nome"
+                        formControlName="sobre_nome">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputPassword4">CPF</label>
+                    <input type="number" class="form-control" id="inputPassword4" placeholder="CPF"
+                        formControlName="cpf">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputAddress">Nome da Mae</label>
+                <input formControlName="nome_mae" type="text" class="form-control" id="inputAddress"
+                    placeholder="Nome de Sua mãe completo">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="inputAddress">CEP</label>
+
+                    <input formControlName="cep" type="text" class="form-control" id="inputAddress"
+                        placeholder="1234 Main St">
+
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="inputAddress2">Logradouro</label>
+                    <input input formControlName="logradouro" type="text" class="form-control" >
+
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputAddress2">Bairro</label>
+                    <input formControlName="bairro" type="text" class="form-control" id="inputAddress">
+
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputCity">Localidade</label>
+                    <input formControlName="localidade" type="text" class="form-control" id="inputCity">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Estado</label>
+                    <input formControlName="uf" type="text" class="form-control" >
+                </div>
+            </div>
+
+        </form>
+        <button (click)="atualizarCliente(cliente)"type="submit" class="btn btn-primary" >Salvar</button>
+    </div>
+</ng-template>
